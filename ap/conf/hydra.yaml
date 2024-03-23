@@ -1,0 +1,31 @@
+run:
+  dir: log/run/${task_type}/${task}/${c.name}/${method}/${p.s}/OD${hydra.job.override_dirname}/seed=${seed}/${now:%m%d_%H%M%S}
+sweep:
+  dir: log/${log_dir}/${task_type}/${task}/${c.name}/${method}/${p.s}
+  subdir: OD${hydra.job.override_dirname}/seed=${seed}/${now:%m%d_%H%M%S}
+output_subdir: null
+job:
+  config:
+    override_dirname:
+      exclude_keys:
+        - seed
+        - task_type
+        - task
+        - method
+        - c
+        - c.max_epoch
+        - c.ept
+        - c.n_test_env
+        - p
+        - p.s
+        - device
+        - show_progress
+        - pid_bias
+        - bind_core
+        - log_dir
+        - video
+        - eval
+        - test_after_train
+        - resume_path
+        - verbose
+        - state_map

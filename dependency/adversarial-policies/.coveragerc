@@ -1,0 +1,7 @@
+[run]
+include=src/*
+
+[paths]
+aprl_source = 
+	src/aprl
+	*venv/lib/python*/site-packages/aprl

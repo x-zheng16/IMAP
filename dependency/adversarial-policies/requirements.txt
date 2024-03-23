@@ -1,0 +1,20 @@
+numpy>=1.15
+pandas>=0.24.1
+scikit-learn>=0.20.3
+Pillow>=6.0.0
+matplotlib>=3.0.3
+Theano>=1.0
+sacred>=0.8.1
+pymongo>=3.8.0
+GitPython>=2.1
+baselines @ git+https://github.com/HumanCompatibleAI/baselines.git@f70377
+stable-baselines @ git+https://github.com/hill-a/stable-baselines.git@6fbc9a9
+ray[debug,tune]>=1.0.0
+boto3>=1.9
+awscli>=1.16
+statsmodels>=0.9.0
+seaborn>=0.9.0
+ilqr @ git+https://github.com/anassinator/ilqr.git
+gym[mujoco]==0.15.4
+mujoco-py-131 @ git+https://github.com/AdamGleave/mujoco-py.git@mj131
+gym_compete @ git+https://github.com/HumanCompatibleAI/multiagent-competition.git@3a3f9dc
