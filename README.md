@@ -1,64 +1,66 @@
-# IMAP
+# Intrinsically Motivated Adversarial Policy
 
-This is code for the DSN 2024 paper: "Toward Evaluating Robustness of Reinforcement Learning with Adversarial Policy". Currently, we only provide the code for IMAP against the RL agent in the single-agent RL tasks . We will release the code for IMAP against victim RL agent in the multi-agent competitive games soon.
+**Toward Evaluating Robustness of Reinforcement Learning with Adversarial Policy (DSN 2024)** \[[Paper](https://arxiv.org/abs/2305.02605)\]  
+Xiang Zheng, [Xingjun Ma](http://xingjunma.com), Shengjie Wang, Xinyu Wang, Chao Shen, Cong Wang
+
+## Abstract
+
+Reinforcement learning agents are susceptible to evasion attacks during deployment. In single-agent environments, these attacks can occur through imperceptible perturbations injected into the inputs of the victim policy network. In multi-agent environments, an attacker can manipulate an adversarial opponent to influence the victim policy's observations indirectly. While adversarial policies offer a promising technique to craft such attacks, current methods are either sample-inefficient due to poor exploration strategies or require extra surrogate model training under the black-box assumption. To address these challenges, in this paper, we propose Intrinsically Motivated Adversarial Policy (IMAP) for efficient black-box adversarial policy learning in both single- and multi-agent environments. We formulate four types of adversarial intrinsic regularizers—maximizing the adversarial state coverage, policy coverage, risk, or divergence—to discover potential vulnerabilities of the victim policy in a principled way. We also present a novel bias-reduction method to balance the extrinsic objective and the adversarial intrinsic regularizers adaptively. Our experiments validate the effectiveness of the four types of adversarial intrinsic regularizers and the bias-reduction method in enhancing black-box adversarial policy learning across a variety of environments. Our IMAP successfully evades two types of defense methods, adversarial training and robust regularizer, decreasing the performance of the state-of-the-art robust WocaR-PPO agents by 34\%-54\% across four single-agent tasks. IMAP also achieves a state-of-the-art attacking success rate of 83.91\% in the multi-agent game YouShallNotPass.
 
 ## Environments
 
-Though it's known to be challenging to install mujoco_py and mujoco_py_131, it should be successful if you strictly adhere to the following steps step by step. Thanks to conda, we can install both pytorch and tensorflow in the same environment.
-
 ```bash
-# create a new conda env
+# Create conda env
 conda create -n imap python=3.7
 conda activate imap
 
-# install torch and pykeops
+# Install torch and pykeops
 pip install -U pip setuptools
 pip install tianshou==0.4.10
 pip install "hydra-core>=1.1,<1.2" "numpy>=1.16,<1.19" hydra-colorlog fast-histogram pykeops==2.1.2 pygame gym==0.15.4 seaborn sacred
 conda install -c conda-forge libstdcxx-ng
 python test/test_pykeops.py
 
-# install gym_compete first
+# Install gym_compete
 pip install gym_compete@git+https://github.com/HumanCompatibleAI/multiagent-competition.git@3a3f9dc
 pip uninstall tensorflow # stable-baselines use tensorflow==1.15.5 instead of tensorflow==2.11.0
 
-# install mujoco_py and mujoco_py_131 for single-agent environments
+# Install mujoco_py and mujoco_py_131 for single-agent environments
 sudo apt install libglew-dev libosmesa6-dev patchelf libgl1-mesa-glx libgl1-mesa-dev libglfw3 libglu1-mesa libxrandr2 libxinerama1 libxi6 libxcursor-dev xvfb ffmpeg
 
-# Please refer to README.md in mujoco_py_131 for how to set the environment variables.
+# Please refer to README.md in mujoco_py_131 for how to set the environment variables
 pip install -e dependency/mujoco_py_131 
 pip install cffi "Cython<3" glfw imageio
 pip install "mujoco-py<2,>=1.15.1.68"
 pip install mujoco_maze
 
-# install tensorflow and sb
+# Install tensorflow and sb
 pip install tensorflow-gpu==1.15.5 tensorflow==1.15.5
 pip install git+ssh://git@github.com/hill-a/stable-baselines.git@v2.10.1
 conda install cudatoolkit=10.0 cudnn~=7.6
 python test/test_env.py # You should successfully run mujoco_py, mujoco_py_131, tensorflow, torch, and pykeops!!!
 
-# install multi-agent competition
+# Install multi-agent competition
 # please refer to dependency/adversarial-policies/README.md for how to install the multi-agent competition
 pip install -e dependency/adversarial-policies
 
-# install the imap
+# Install IMAP
 pip install -e .
 
-# create agents.json for mujoco_robust and mujoco_sparse
+# Create agents.json for mujoco_robust and mujoco_sparse
 python zoo/create_zoo.py
 
-# create victim_zoo
+# Create victim_zoo
 cd zoo/multicomp
 python victim_zoo.py
 
-# test vanilla PPO method now!
+# Test vanilla PPO
 python ap/train.py -m log_dir=debug c=debug task=Hopper-v3 method=base
-
 ```
 
 ## Experiments
 
-### launch IMAP to attack a black-box robust dense-reward RL agent
+### IMAP Against Robust MuJoCo RL Agents in Single-Agent Tasks
 
 ```bash
 # SA-RL
