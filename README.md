@@ -1,6 +1,6 @@
 # Intrinsically Motivated Adversarial Policy
 
-**Toward Evaluating Robustness of Reinforcement Learning with Adversarial Policy (DSN 2024)** \[[Paper](https://arxiv.org/abs/2305.02605)\]  
+**Toward Evaluating Robustness of Reinforcement Learning with Adversarial Policy (DSN 2024)** \[[Paper](https://arxiv.org/pdf/2305.02605)\]  
 [Xiang Zheng](https://x-zheng16.github.io), [Xingjun Ma](http://xingjunma.com), [Shengjie Wang](https://shengjiewang-jason.github.io), Xinyu Wang, Chao Shen, [Cong Wang](https://www.cs.cityu.edu.hk/~congwang/)
 
 ## Abstract
